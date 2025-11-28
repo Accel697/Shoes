@@ -1,0 +1,49 @@
+﻿<Page x:Class="Shoes.Pages.AddEditProduct"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Shoes.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditProduct">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="220"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Name="tblId" Text="Артикул:" Visibility="Collapsed"/>
+            <TextBox Name="tbId" Text="{Binding id}" Visibility="Collapsed"/>
+
+            <TextBlock Text="Название:"/>
+            <TextBox Name="tbTitle" Text="{Binding title}"/>
+
+            <TextBlock Text="Цена:"/>
+            <TextBox Name="tbPrice" Text="{Binding price}"/>
+
+            <TextBlock Text="Поставщик:"/>
+            <ComboBox Name="cbSupplier" SelectedItem="{Binding supplier}"/>
+
+            <TextBlock Text="Производитель:"/>
+            <ComboBox Name="cbManufacturer" SelectedItem="{Binding manufacturer}"/>
+
+            <TextBlock Text="Категория:"/>
+            <ComboBox Name="cbCategory" SelectedItem="{Binding category}"/>
+
+            <TextBlock Text="Скидка:"/>
+            <TextBox Name="tbDiscount" Text="{Binding discount}"/>
+
+            <TextBlock Text="Количество на складе:"/>
+            <TextBox Name="tbQuantityInStock" Text="{Binding quantity_in_stock}"/>
+
+            <TextBlock Text="Описание:"/>
+            <TextBox Name="tbDescription" Text="{Binding description}"/>
+            
+            
+        </StackPanel>
+    </Grid>
+</Page>

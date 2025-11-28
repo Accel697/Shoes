@@ -13,10 +13,10 @@ namespace Shoes.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class shoesEntities : DbContext
+    public partial class shoesEntities1 : DbContext
     {
-        public shoesEntities()
-            : base("name=shoesEntities")
+        public shoesEntities1()
+            : base("name=shoesEntities1")
         {
         }
     

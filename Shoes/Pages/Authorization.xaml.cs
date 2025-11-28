@@ -33,7 +33,7 @@ namespace Shoes.Pages
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new shoesEntities())
+            using (var context = new shoesEntities1())
             {
                 var user = context.users.FirstOrDefault(u => u.login == tbLogin.Text.ToLower().ToString() && u.password == pbPassword.Password.ToString());
                 if (user != null)

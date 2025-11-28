@@ -37,6 +37,7 @@ namespace Shoes.Model
         public virtual ICollection<orders_products> orders_products { get; set; }
         public virtual products_categories products_categories { get; set; }
         public virtual suppliers suppliers { get; set; }
+        public virtual units units { get; set; }
 
         public string Background
         {
@@ -46,6 +47,11 @@ namespace Shoes.Model
                 {
                     return "#2E8B57";
                 }
+                else if (this.quantity_in_stock == 0)
+                {
+                    return "Blue";
+                }
+
                 return "#fff";
             }
         }

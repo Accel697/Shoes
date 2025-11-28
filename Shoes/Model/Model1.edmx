@@ -58,7 +58,7 @@
           <Property Name="supplier" Type="bigint" Nullable="false" />
           <Property Name="manufacturer" Type="bigint" Nullable="false" />
           <Property Name="category" Type="bigint" Nullable="false" />
-          <Property Name="discount" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="discount" Type="int" />
           <Property Name="quantity_in_stock" Type="int" />
           <Property Name="description" Type="varchar(max)" />
           <Property Name="photo" Type="varchar" MaxLength="50" />
@@ -209,6 +209,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_products_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_users_users_roles">
           <End Role="users_roles" Type="Self.users_roles" Multiplicity="1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
@@ -264,6 +276,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_products_suppliers" Association="Self.FK_products_suppliers">
             <End Role="suppliers" EntitySet="suppliers" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_units" Association="Self.FK_products_units">
+            <End Role="units" EntitySet="units" />
             <End Role="products" EntitySet="products" />
           </AssociationSet>
           <AssociationSet Name="FK_users_users_roles" Association="Self.FK_users_users_roles">
@@ -346,6 +362,7 @@
           <NavigationProperty Name="orders_products" Relationship="Self.FK_orders_products_products" FromRole="products" ToRole="orders_products" />
           <NavigationProperty Name="products_categories" Relationship="Self.FK_products_products_categories" FromRole="products" ToRole="products_categories" />
           <NavigationProperty Name="suppliers" Relationship="Self.FK_products_suppliers" FromRole="products" ToRole="suppliers" />
+          <NavigationProperty Name="units" Relationship="Self.FK_products_units" FromRole="products" ToRole="units" />
         </EntityType>
         <EntityType Name="products_categories">
           <Key>
@@ -379,6 +396,7 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_products_units" FromRole="units" ToRole="products" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -498,6 +516,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_products_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_users_users_roles">
           <End Role="users_roles" Type="Self.users_roles" Multiplicity="1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
@@ -510,7 +540,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="shoesEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="shoesEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="manufacturers" EntityType="Self.manufacturers" />
           <EntitySet Name="orders" EntityType="Self.orders" />
           <EntitySet Name="orders_products" EntityType="Self.orders_products" />
@@ -555,6 +585,10 @@
             <End Role="suppliers" EntitySet="suppliers" />
             <End Role="products" EntitySet="products" />
           </AssociationSet>
+          <AssociationSet Name="FK_products_units" Association="Self.FK_products_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
           <AssociationSet Name="FK_users_users_roles" Association="Self.FK_users_users_roles">
             <End Role="users_roles" EntitySet="users_roles" />
             <End Role="users" EntitySet="users" />
@@ -565,7 +599,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище shoesModelContainer" CdmEntityContainer="shoesEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище shoesModelContainer" CdmEntityContainer="shoesEntities1">
           <EntitySetMapping Name="manufacturers">
             <EntityTypeMapping TypeName="shoesModel.manufacturers">
               <MappingFragment StoreEntitySet="manufacturers">

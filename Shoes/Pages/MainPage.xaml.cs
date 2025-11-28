@@ -21,39 +21,54 @@ namespace Shoes.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        long role;
+
         public MainPage(users user)
         {
             InitializeComponent();
+            if (user != null)
+            {
+                role = user.role;
+            }
+            if (role == 2 || role == 3)
+            {
+                tbSearch.Visibility = Visibility.Visible;
+                cbFilter.Visibility = Visibility.Visible;
+                cbSort.Visibility = Visibility.Visible;
+            }
             LoadProduct();
         }
 
         private void LoadProduct()
         {
-            using (var context = new shoesEntities())
+            using (var context = new shoesEntities1())
             {
-                var products = context.products.ToList();
+                var products = context.products.Include("products_categories").Include("units").ToList();
                 LviewProducts.ItemsSource = products;
             }
         }
 
         private void tbSearch_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            LoadProduct();
         }
 
         private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            LoadProduct();
         }
 
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            LoadProduct();
         }
 
         private void LviewProducts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (role == 1)
+            {
+                NavigationService.Navigate(new AddEditProduct(LviewProducts.SelectedItem as products));
+            }
         }
     }
 }
