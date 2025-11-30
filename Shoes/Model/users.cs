@@ -31,5 +31,13 @@ namespace Shoes.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orders> orders { get; set; }
         public virtual users_roles users_roles { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return $"{this.last_name} {this.first_name} {this.middle_name}";
+            }
+        }
     }
 }

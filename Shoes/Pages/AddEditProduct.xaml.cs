@@ -33,11 +33,7 @@ namespace Shoes.Pages
             {
                 currentProduct = product;
                 btnDelete.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                tblId.Visibility = Visibility.Visible;
-                tbId.Visibility = Visibility.Visible;
+                tbId.IsEnabled = false;
             }
 
             currentProduct.unit = 1;
@@ -79,10 +75,18 @@ namespace Shoes.Pages
                 {
                     using (var context = new shoesEntities1())
                     {
-                        context.products.Remove(currentProduct);
-                        context.SaveChanges();
-                        MessageBox.Show("Запись удалена", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-                        NavigationService.GoBack();
+                        if (!context.orders_products.Any(op => op.product_id == currentProduct.id))
+                        {
+                            var productInDb = context.products.FirstOrDefault(p => p.id == currentProduct.id);
+                            context.products.Remove(productInDb);
+                            context.SaveChanges();
+                            MessageBox.Show("Запись удалена", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                            NavigationService.GoBack();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Нельзя удалить продукт, который есть в заказах", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
                 catch (Exception ex)

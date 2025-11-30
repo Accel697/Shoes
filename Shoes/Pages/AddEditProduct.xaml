@@ -16,8 +16,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Name="tblId" Text="Артикул:" Visibility="Collapsed"/>
-            <TextBox Name="tbId" Text="{Binding id}" Visibility="Collapsed"/>
+            <TextBlock Text="Артикул:"/>
+            <TextBox Name="tbId" Text="{Binding id}"/>
 
             <TextBlock Text="Название:"/>
             <TextBox Name="tbTitle" Text="{Binding title}"/>

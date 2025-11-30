@@ -73,5 +73,34 @@ namespace Shoes.Model
                 }
             }
         }
+
+        public string CostLineThrough
+        {
+            get
+            {
+                if (this.discount > 0)
+                {
+                    var cost = $"{this.price: ##}";
+                    var costLineThrough = string.Concat(cost.Select(c => c + "\u0336"));
+                    return $"{costLineThrough}";
+                }
+                return null;
+            }
+        }
+
+        public string CostWithDiscount
+        {
+            get
+            {
+                if (this.discount > 0)
+                {
+                    var costWithDiscount = Convert.ToDouble(this.price) - Convert.ToDouble(this.price) * Convert.ToDouble(this.discount / 100.00);
+                    var cost = $"{this.price: ##}";
+                    var costLineThrough = string.Concat(cost.Select(c => c + "\u0336"));
+                    return $"{costWithDiscount: ##} руб";
+                }
+                return $"{this.price: ##} руб";
+            }
+        }
     }
 }
