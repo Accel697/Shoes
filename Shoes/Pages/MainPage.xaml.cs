@@ -29,13 +29,18 @@ namespace Shoes.Pages
             if (user != null)
             {
                 role = user.role;
+                tblUser.Text = $"{user.users_roles.title}: {user.last_name} {user.first_name} {user.middle_name}";
             }
-            if (role == 2 || role == 3)
+            else { tblUser.Text = "Пользователь: Гость"; }
+
+            if (role == 1 || role == 2)
             {
                 tbSearch.Visibility = Visibility.Visible;
                 cbFilter.Visibility = Visibility.Visible;
                 cbSort.Visibility = Visibility.Visible;
             }
+            if (role == 1) { btnAddProduct.Visibility = Visibility.Visible; }
+
             LoadProduct();
         }
 
@@ -43,7 +48,7 @@ namespace Shoes.Pages
         {
             using (var context = new shoesEntities1())
             {
-                var products = context.products.Include("products_categories").Include("units").ToList();
+                var products = context.products.Include("products_categories").Include("suppliers").Include("manufacturers").Include("units").ToList();
                 LviewProducts.ItemsSource = products;
             }
         }
@@ -68,6 +73,24 @@ namespace Shoes.Pages
             if (role == 1)
             {
                 NavigationService.Navigate(new AddEditProduct(LviewProducts.SelectedItem as products));
+            }
+        }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditProduct(null));
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                using (var context = new shoesEntities1())
+                {
+                    context.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                    LviewProducts.ItemsSource = null;
+                    LoadProduct();
+                }
             }
         }
     }

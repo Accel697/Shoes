@@ -26,13 +26,13 @@
             <TextBox Name="tbPrice" Text="{Binding price}"/>
 
             <TextBlock Text="Поставщик:"/>
-            <ComboBox Name="cbSupplier" SelectedItem="{Binding supplier}"/>
+            <ComboBox Name="cbSupplier" SelectedValue="{Binding supplier}" SelectedValuePath="id" DisplayMemberPath="title"/>
 
             <TextBlock Text="Производитель:"/>
-            <ComboBox Name="cbManufacturer" SelectedItem="{Binding manufacturer}"/>
+            <ComboBox Name="cbManufacturer" SelectedValue="{Binding manufacturer}" SelectedValuePath="id" DisplayMemberPath="title"/>
 
             <TextBlock Text="Категория:"/>
-            <ComboBox Name="cbCategory" SelectedItem="{Binding category}"/>
+            <ComboBox Name="cbCategory" SelectedValue="{Binding category}" SelectedValuePath="id" DisplayMemberPath="title"/>
 
             <TextBlock Text="Скидка:"/>
             <TextBox Name="tbDiscount" Text="{Binding discount}"/>
@@ -42,8 +42,16 @@
 
             <TextBlock Text="Описание:"/>
             <TextBox Name="tbDescription" Text="{Binding description}"/>
-            
-            
+
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="img" Width="100" Height="100" Source="{Binding ImgPath}"/>
+                <Button x:Name="btnEnterImage" Content="Выбрать фото" Click="btnEnterImage_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnDelete" Content="Удалить" Click="btnDelete_Click" Visibility="Collapsed" Margin="15"/>
+                <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click" Margin="15"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

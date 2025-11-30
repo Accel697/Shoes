@@ -11,7 +11,8 @@ namespace Shoes.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -60,7 +61,7 @@ namespace Shoes.Model
         {
             get
             {
-                if (this.photo != null)
+                if (!string.IsNullOrWhiteSpace(this.photo))
                 {
                     var path = $"pack://application:,,,/Resources/{this.photo}";
                     return path;
