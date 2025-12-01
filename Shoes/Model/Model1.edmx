@@ -309,7 +309,7 @@
           <Property Name="delivery_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pick_up_point" Type="Int64" Nullable="false" />
           <Property Name="client" Type="Int64" Nullable="false" />
-          <Property Name="code" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="code" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Int64" Nullable="false" />
           <NavigationProperty Name="orders_statuses" Relationship="Self.FK_orders_orders_statuses" FromRole="orders" ToRole="orders_statuses" />
           <NavigationProperty Name="pick_up_points" Relationship="Self.FK_orders_pick_up_points" FromRole="orders" ToRole="pick_up_points" />

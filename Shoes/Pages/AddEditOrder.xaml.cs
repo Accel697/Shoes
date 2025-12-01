@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Shoes.Model;
+using Shoes.Services;
 
 namespace Shoes.Pages
 {
@@ -77,7 +78,7 @@ namespace Shoes.Pages
                         }
                         else
                         {
-                            MessageBox.Show("Нельзя удалить заказ, в котором есть в товары", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Нельзя удалить заказ, в котором есть в товары", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                 }
@@ -90,6 +91,15 @@ namespace Shoes.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            DataValidator validator = new DataValidator();
+            var (isValid, errors) = validator.OrderValidator(currentOrder);
+
+            if (!isValid )
+            {
+                MessageBox.Show(string.Join("\n", errors), "Ошибки валидации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             using (var context = new shoesEntities1())
             {
                 if (!context.orders.Any(o => o.id == currentOrder.id))

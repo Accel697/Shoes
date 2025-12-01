@@ -21,10 +21,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Margin="10">
-            <Button x:Name="btnToOrders" Content="Заказы" Click="btnToOrders_Click" Visibility="Collapsed" HorizontalAlignment="Left" Margin="15"/>
-            <TextBlock Name="tblUser" HorizontalAlignment="Right"/>
-        </StackPanel>
+        <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" x:Name="btnToOrders" Content="Заказы" Click="btnToOrders_Click" Visibility="Collapsed" HorizontalAlignment="Left" Margin="15"/>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Name="tblUser" HorizontalAlignment="Right" Margin="15"/>
 
         <TextBox Grid.Column="0" Grid.Row="1" Name="tbSearch" SelectionChanged="tbSearch_SelectionChanged" Width="150" Height="30" Visibility="Collapsed"/>
         <ComboBox Grid.Column="1" Grid.Row="1" Name="cbFilter" SelectedValue="0" SelectedValuePath="id" DisplayMemberPath="title" SelectionChanged="cbFilter_SelectionChanged" Width="150" Height="30" Visibility="Collapsed"/>
@@ -58,8 +56,8 @@
                                 <TextBlock Text="{Binding manufacturers.title, StringFormat='Производитель: \{0}'}"/>
                                 <TextBlock Text="{Binding suppliers.title, StringFormat='Поставщик: \{0}'}"/>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding CostLineThrough}" Foreground="Red"/>
-                                    <TextBlock Text="{Binding CostWithDiscount}"/>
+                                    <TextBlock Text="{Binding CostLineThrough}" Foreground="Red" Margin="0"/>
+                                    <TextBlock Text="{Binding CostWithDiscount}" Margin="0"/>
                                 </StackPanel>
                                 <TextBlock Text="{Binding units.title, StringFormat='Еденица измерения: \{0}'}"/>
                                 <TextBlock Text="{Binding quantity_in_stock, StringFormat='Количество на складе: \{0}'}"/>

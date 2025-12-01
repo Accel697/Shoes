@@ -25,7 +25,7 @@ namespace Shoes.Model
         public System.DateTime delivery_date { get; set; }
         public long pick_up_point { get; set; }
         public long client { get; set; }
-        public decimal code { get; set; }
+        public int code { get; set; }
         public long status { get; set; }
     
         public virtual orders_statuses orders_statuses { get; set; }

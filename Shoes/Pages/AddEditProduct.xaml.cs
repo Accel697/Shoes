@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Shoes.Model;
+using Shoes.Services;
 
 namespace Shoes.Pages
 {
@@ -85,7 +86,7 @@ namespace Shoes.Pages
                         }
                         else
                         {
-                            MessageBox.Show("Нельзя удалить продукт, который есть в заказах", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Нельзя удалить продукт, который есть в заказах", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                 }
@@ -100,6 +101,15 @@ namespace Shoes.Pages
         {
             using (var context = new shoesEntities1())
             {
+                DataValidator validator = new DataValidator();
+                var (isValid, errors) = validator.ProductValidator(currentProduct);
+
+                if (!isValid)
+                {
+                    MessageBox.Show(string.Join("\n", errors), "Ошибки валидации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 if (!context.products.Any(p => p.id == currentProduct.id))
                 {
                     try
