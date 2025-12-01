@@ -104,7 +104,7 @@ namespace Shoes.Pages
                 DataValidator validator = new DataValidator();
                 var (isValid, errors) = validator.ProductValidator(currentProduct);
 
-                if (!isValid)
+                if (!isValid) // проверка на валидность
                 {
                     MessageBox.Show(string.Join("\n", errors), "Ошибки валидации", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;

@@ -35,21 +35,21 @@ namespace Shoes.Pages
             InitializeComponent();
             LoadComboBoxes();
 
-            if (user != null)
+            if (user != null) // проверяем какой пользователь для отображения соответствующего функционала
             {
                 currentUser = user;
                 tblUser.Text = $"{currentUser.users_roles.title}: {currentUser.last_name} {currentUser.first_name} {currentUser.middle_name}";
+
+                if ((currentUser.role == 1 || currentUser.role == 2))
+                {
+                    btnToOrders.Visibility = Visibility.Visible;
+                    tbSearch.Visibility = Visibility.Visible;
+                    cbFilter.Visibility = Visibility.Visible;
+                    cbSort.Visibility = Visibility.Visible;
+                }
+                if (currentUser.role == 1) { btnAddProduct.Visibility = Visibility.Visible; }
             }
             else { tblUser.Text = "Пользователь: Гость"; }
-
-            if (currentUser.role == 1 || currentUser.role == 2)
-            {
-                btnToOrders.Visibility = Visibility.Visible;
-                tbSearch.Visibility = Visibility.Visible;
-                cbFilter.Visibility = Visibility.Visible;
-                cbSort.Visibility = Visibility.Visible;
-            }
-            if (currentUser.role == 1) { btnAddProduct.Visibility = Visibility.Visible; }
 
             LoadProduct();
         }

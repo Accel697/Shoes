@@ -40,6 +40,8 @@ namespace Shoes.Pages
                 {
                     MessageBox.Show("Успешная авторизация", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     NavigationService.Navigate(new MainPage(user));
+                    tbLogin.Clear();
+                    pbPassword.Clear();
                 }
                 else
                 {
