@@ -73,6 +73,11 @@ namespace Shoes.Pages
             {
                 var products = context.products.Include("products_categories").Include("suppliers").Include("manufacturers").Include("units").ToList();
 
+                products = products.Where(p => p.title.ToLower().Contains(tbSearch.Text.ToLower()) 
+                || p.description.ToLower().Contains(tbSearch.Text.ToLower()) 
+                || p.suppliers.title.ToLower().Contains(tbSearch.Text.ToLower()) 
+                || p.manufacturers.title.ToLower().Contains(tbSearch.Text.ToLower())).ToList(); // поиск по названию, описанию, поставщику и производителю
+
                 if (cbFilter.SelectedItem is suppliers selectedSupplier && selectedSupplier.id != 0)
                 {
                     products = products.Where(p => p.supplier == selectedSupplier.id).ToList();
